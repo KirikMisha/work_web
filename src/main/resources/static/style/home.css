@@ -1,0 +1,10 @@
+/*todo.todo: make more files not on every page but on every component as header, footer ...*/
+/*
+    todo: use BEM to name classes
+*/
+.container{
+
+}
+.header {
+    background-color: #d31f21;
+}
