@@ -2,9 +2,19 @@
 /*
     todo: use BEM to name classes
 */
-.container{
 
+@import "./font.css";
+body {
+    font-family: 'Playfair Display', sans-serif;
+    font-weight: 400;
 }
-.header {
-    background-color: #d31f21;
+
+.background-image-container {
+    background-image: url("../icon/main_img.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 1586px;
+    margin-top: -25px;
+    z-index: 0;
 }

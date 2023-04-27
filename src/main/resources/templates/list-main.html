@@ -8,15 +8,16 @@
 
 </head>
 <body>
-<div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom header">
-    <img alt="Логотип" class="me-3" height="50" th:src="@{/icon/Main_Icon.png}" width="50">
-    <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
-        <span class="fs-4">Главная</span>
-    </a>
-    <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-        <a class="me-3 py-2 text-dark text-decoration-none" href="/list/add">Добавить сотрудника</a>
-    </nav>
-</div>
+<header th:replace="components/header :: header"></header>
+<!--<header class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom header">-->
+<!--    <img alt="Логотип" class="me-3" height="50" th:src="@{/icon/Main_Icon.png}" width="50">-->
+<!--    <a href="/" class="d-flex align-items-center text-dark text-decoration-none">-->
+<!--        <span class="fs-4">Главная</span>-->
+<!--    </a>-->
+<!--    <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">-->
+<!--        <a class="me-3 py-2 text-dark text-decoration-none" href="/list/add">Добавить сотрудника</a>-->
+<!--    </nav>-->
+<!--</header>-->
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-4">
@@ -38,7 +39,7 @@
                 <div th:each="el : ${posts}" class="card mt-2">
                     <div class="card-body">
                         <h3 th:text="${el.name + ' ' + el.surname}" class="card-title"></h3>
-                        <p th:text="${el.telephone_number}" class="card-text"></p>
+                        <p th:text="${el.phoneNumber}" class="card-text"></p>
                     </div>
                 </div>
             </div>

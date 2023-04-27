@@ -10,6 +10,7 @@ import lombok.*;
 @Entity
 @NoArgsConstructor
 @Data
+@AllArgsConstructor
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
