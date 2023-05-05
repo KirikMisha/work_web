@@ -19,7 +19,7 @@ import java.util.List;
 @Service
 public class CalendarDayService {
 
-    private final String CALENDAR_URL = "https://www.calend.ru/narod/may/";
+    private final String CALENDAR_URL = "https://www.calend.ru/holidays/may/";
 
     @Autowired
     private CalendarDayRepository calendarDayRepository;
@@ -41,7 +41,7 @@ public class CalendarDayService {
                 LocalDate date = LocalDate.parse(dataNum, formatter);
 
                 // Get the description
-                String description = dayElement.select(".caption").text();
+                String description = dayElement.select(".caption").first().text();
 
                 // Create a new CalendarDay object and add it to the list
                 CalendarDay calendarDay = new CalendarDay();
@@ -49,6 +49,16 @@ public class CalendarDayService {
                 calendarDay.setDescription(description);
                 calendarDays.add(calendarDay);
             }
+
+            // Find and remove duplicate records
+            List<CalendarDay> duplicates = new ArrayList<>();
+            for (CalendarDay calendarDay : calendarDays) {
+                CalendarDay existingDay = calendarDayRepository.findByDate(calendarDay.getDate());
+                if (existingDay != null) {
+                    duplicates.add(calendarDay);
+                }
+            }
+            calendarDays.removeAll(duplicates);
 
             // Save the calendar days to the database
             calendarDayRepository.saveAll(calendarDays);
@@ -60,7 +70,9 @@ public class CalendarDayService {
     public CalendarDay getCalendarDayByDate(LocalDate date) {
         return calendarDayRepository.findByDate(date);
     }
+
     public List<CalendarDay> getAllCalendarDays() {
         return calendarDayRepository.findAll();
     }
 }
+

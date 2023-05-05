@@ -22,19 +22,13 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="calendarDay : ${calendarDays}">
-      <td th:text="${calendarDay.date}"></td>
-      <td th:text="${calendarDay.description}"></td>
-    </tr>
+    <tr>
+    <td th:text="${#temporals.format(#temporals.createNow().toLocalDate(), 'dd.MM.yyyy')}"></td>
+    <td th:text="${todayDay.description}"></td>
+  </tr>
     </tbody>
   </table>
 </div>
-
-<!-- Bootstrap JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfS6CUHpLyNTNUaG+2m2g2LXpizYD
-        fzVZ3N3MIa"
-        crossorigin="anonymous"></script>
 
 </body>
 </html>

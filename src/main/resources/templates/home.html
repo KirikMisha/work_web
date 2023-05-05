@@ -17,7 +17,8 @@
         </div>
         <div class="col-md-4">
             <h2 class="text-center">Цитаты дня, погода, дни рождения</h2>
-            <p>Здесь будут цитаты дня, погода и дни рождения</p>
+            <p class="color-main"><td th:text="${#temporals.format(#temporals.createNow().toLocalDate(), 'dd.MM.yyyy')}"></td>
+            <td th:text="${todayDay.description}"></td></p>
         </div>
         <div class="col-md-4">
             <h2 class="text-center text">Объявления</h2>
