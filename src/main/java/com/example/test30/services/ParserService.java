@@ -1,6 +1,6 @@
 package com.example.test30.services;
 
-import com.example.test30.models.Person;
+import com.example.test30.models.PersonEntity;
 import com.example.test30.repo.PersonRepository1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,10 +22,12 @@ public class ParserService {
     }
 
     public void parseAndSave(String filePath) throws IOException {
-        List<Person> persons = excelReader.readExcelFile(filePath);
+        List<PersonEntity> persons = excelReader.readExcelFile(filePath);
 
-        for (Person person : persons) {
-            personRepository.save(person);
+        for (PersonEntity person : persons) {
+            if (personRepository.findByLastNameContainingIgnoreCaseAndFirstNameContainingIgnoreCase(person.getLastName(), person.getFirstName()) == null) {
+                personRepository.save(person);
+            }
         }
     }
 }

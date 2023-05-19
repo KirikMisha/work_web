@@ -1,6 +1,6 @@
 package com.example.test30.services;
 
-import com.example.test30.models.Person;
+import com.example.test30.models.PersonEntity;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
@@ -13,8 +13,8 @@ import java.util.List;
 @Service
 public class ExcelReader {
 
-    public List<Person> readExcelFile(String filePath) throws IOException {
-        List<Person> persons = new ArrayList<>();
+    public List<PersonEntity> readExcelFile(String filePath) throws IOException {
+        List<PersonEntity> persons = new ArrayList<>();
 
         try (FileInputStream file = new FileInputStream(filePath);
              Workbook workbook = new XSSFWorkbook(file)) {
@@ -42,7 +42,14 @@ public class ExcelReader {
                             String phoneNumber = getCellValueAsString(personRow.getCell(3));
                             String officeNumber = getCellValueAsString(personRow.getCell(4));
 
-                            Person person = new Person(firstName, lastName, middleName, position, officeNumber, phoneNumber);
+                            PersonEntity person = new PersonEntity();
+                            person.setFirstName(firstName);
+                            person.setLastName(lastName);
+                            person.setMiddleName(middleName);
+                            person.setPosition(position);
+                            person.setOfficeNumber(officeNumber);
+                            person.setPhoneNumber(phoneNumber);
+
                             persons.add(person);
                         }
                     }

@@ -1,21 +1,25 @@
-package com.example.test30.models;
-
-import lombok.Data;
-
-@Data
-public class Person {
-    private String lastName;
-    private String firstName;
-    private String middleName;
-    private String position;
-    private String officeNumber;
-    private String phoneNumber;
-    public Person(String firstName, String lastName, String middleName, String position, String officeNumber, String phoneNumber) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.middleName = middleName;
-        this.position = position;
-        this.officeNumber = officeNumber;
-        this.phoneNumber = phoneNumber;
-    }
-}
+//import jakarta.persistence.Entity;
+//import jakarta.persistence.GeneratedValue;
+//import jakarta.persistence.GenerationType;
+//import jakarta.persistence.Id;
+//import lombok.AllArgsConstructor;
+//import lombok.Data;
+//import lombok.NoArgsConstructor;
+//
+//@Entity
+//@Data
+//@NoArgsConstructor
+//@AllArgsConstructor
+//public class Person {
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
+//
+//    private String lastName;
+//    private String firstName;
+//    private String middleName;
+//    private String position;
+//    private String officeNumber;
+//    private String phoneNumber;
+//
+//}

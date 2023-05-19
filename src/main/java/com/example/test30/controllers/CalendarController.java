@@ -1,5 +1,6 @@
 package com.example.test30.controllers;
 
+import com.example.test30.services.ParserService;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.ui.Model;
 import com.example.test30.models.CalendarDay;
@@ -35,17 +36,6 @@ public class CalendarController {
         model.addAttribute("calendarDays", calendarDays);
         model.addAttribute("homePage", true);
         model.addAttribute("title", "Главная страница");
-
-//        String filePath = "classpath:static/fil.xlsx";
-//        try {
-//            parserService.parseAndSave(resourceLoader.getResource(filePath).getFile().getPath());
-//            // Если парсинг выполнен успешно, вы можете добавить соответствующее сообщение в модель
-//            model.addAttribute("message", "Парсинг выполнен успешно!");
-//        } catch (Exception e) {
-//            // Логирование исключения или вывод сообщения об ошибке
-//            e.printStackTrace(); // Логирование стека трейса
-//            model.addAttribute("error", "Ошибка чтения файла: " + e.getMessage());
-//        }
 
         return "home";
     }
