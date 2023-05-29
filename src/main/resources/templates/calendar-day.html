@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title th:text="${title}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="/style/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/style/index.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/style/calendar.css}">
+</head>
+<body>
+<header th:replace="components/header :: header">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Logo</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link 1</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link 2</a>
+                </li>
+                <!-- Добавьте другие пункты меню здесь -->
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-center">Детали календарного дня</h2>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <h3><span th:text="${calendarDay.date}"></span></h3>
+        <p>
+            <a th:href="@{/details/info1(id=${calendarDay.id})}">
+                <span th:utext="${calendarDay.additionalInfo1}"></span>
+            </a></br>
+            <a th:href="@{/details/info2(id=${calendarDay.id})}">
+                <span th:utext="${calendarDay.additionalInfo2}"></span>
+            </a></br>
+            <a th:href="@{/details/info3(id=${calendarDay.id})}">
+                <span th:utext="${calendarDay.additionalInfo3}"></span>
+            </a></br>
+            <a th:href="@{/details/info4(id=${calendarDay.id})}">
+                <span th:utext="${calendarDay.additionalInfo4}"></span>
+            </a></br>
+            <a th:href="@{/details/info5(id=${calendarDay.id})}">
+                <span th:utext="${calendarDay.additionalInfo5}"></span>
+            </a></br>
+            <a th:href="@{/details/info6(id=${calendarDay.id})}">
+                <span th:utext="${calendarDay.additionalInfo6}"></span>
+            </a></br>
+            <a th:href="@{/details/info7(id=${calendarDay.id})}">
+                <span th:utext="${calendarDay.additionalInfo7}"></span>
+            </a></br>
+            <a th:href="@{/details/info8(id=${calendarDay.id})}">
+                <span th:utext="${calendarDay.additionalInfo8}"></span>
+            </a></br>
+            <a th:href="@{/details/info9(id=${calendarDay.id})}">
+                <span th:utext="${calendarDay.additionalInfo9}"></span>
+            </a></br>
+            <a th:href="@{/details/info10(id=${calendarDay.id})}">
+                <span th:utext="${calendarDay.additionalInfo10}"></span>
+            </a></br>
+        </p>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+</body>
+</html>

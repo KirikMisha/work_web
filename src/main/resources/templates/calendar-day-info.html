@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+  <title th:text="${title}"></title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <link rel="stylesheet" href="/style/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" th:href="@{/style/index.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/style/calendar.css}">
+</head>
+<body>
+<header th:replace="components/header :: header">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Logo</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link 1</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link 2</a>
+        </li>
+        <!-- Добавьте другие пункты меню здесь -->
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="text-center">Детали календарного дня</h2>
+    </div>
+  </div>
+  <!DOCTYPE HTML>
+  <html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Details Page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  </head>
+  <body>
+  <div class="container">
+
+      <span th:utext="${internationalInformation1}"></span>
+
+      <span th:utext="${internationalInformation2}"></span>
+
+
+      <span th:utext="${internationalInformation3}"></span>
+
+
+      <span th:utext="${internationalInformation4}"></span>
+
+
+      <span th:utext="${internationalInformation5}"></span>
+
+  </div>
+  </body>
+  </html>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+</body>
+</html>

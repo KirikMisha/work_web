@@ -1,5 +1,6 @@
 package com.example.test30.controllers;
 
+import com.example.test30.config.FormattingUtils;
 import com.example.test30.services.ParserService;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.ui.Model;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import com.example.test30.services.ParserService;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -38,5 +40,15 @@ public class CalendarController {
         model.addAttribute("title", "Главная страница");
 
         return "home";
+    }
+
+    @GetMapping("/calendar/{id}")
+    public String showCalendarDayDetails(Model model, @PathVariable("id") Long id) {
+        CalendarDay calendarDay = calendarDayService.getCalendarDayById(id);
+        model.addAttribute("calendarDay", calendarDay);
+        model.addAttribute("formattedAdditionalInfo", FormattingUtils.formatAdditionalInfo(calendarDay));
+        model.addAttribute("title", "Детали календарного дня");
+
+        return "calendar-day";
     }
 }

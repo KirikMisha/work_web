@@ -66,7 +66,6 @@ public class ListWorkersController {
             parserService.parseAndSave(resourceLoader.getResource(filePath).getFile().getPath());
             // Если парсинг выполнен успешно, вы можете добавить соответствующее сообщение в модель
             model.addAttribute("message", "Парсинг выполнен успешно!");
-            // calendarDayService.scrapeCalendarDays(); // <-- Эту строку я закомментировал, поскольку в контроллере ListWorkersController нет объявления переменной calendarDayService
             calendarDayService.scrapeCalendarDays();
         } catch (Exception e) {
             // Логирование исключения или вывод сообщения об ошибке

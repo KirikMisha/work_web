@@ -21,3 +21,12 @@ body {
 .color-main{
     color: white;
 }
+a {
+    text-decoration: none;
+    color: inherit;
+}
+.nav-menu{
+    float: right;
+    margin-left: auto;
+}
+

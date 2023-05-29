@@ -19,7 +19,7 @@
 .under-style{
     margin-bottom: 100px;
     position: absolute;
-    width: 1920px;
+    width: 1519px;
     height: 211px;
     left: 0px;
     top: 1450px;
@@ -29,4 +29,50 @@
 .text, h2, p {
     position: relative;
     z-index: 2;
+}
+header a.active {
+    font-weight: bold;
+    color: red;
+}
+#collapsedNav {
+    z-index: 9999;
+    background-color: rgba(73, 71, 71, 0.5);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: none;
+}
+
+.navbar-toggler {
+    z-index: 10000;
+}
+
+#collapsedNav.show {
+    display: block;
+}
+
+#collapsedNav .navbar-nav {
+    text-align: right;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-toggler {
+    border: none;
+    background: none;
+    padding: 0;
+    font-size: 1.5rem;
+    line-height: 1;
+}
+.nav-menu{
+    float: right;
+    margin-left: auto;
+}
+.nav-link.col-1{
+    color: white;
 }
