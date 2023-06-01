@@ -76,3 +76,7 @@ header a.active {
 .nav-link.col-1{
     color: white;
 }
+a {
+    text-decoration: none;
+    color: inherit;
+}

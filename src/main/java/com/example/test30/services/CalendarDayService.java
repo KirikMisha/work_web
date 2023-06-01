@@ -18,7 +18,7 @@ import java.util.List;
 @Service
 public class CalendarDayService {
 
-    private final String CALENDAR_URL = "https://www.calend.ru/holidays/may/";
+    private final String CALENDAR_URL = "https://www.calend.ru/holidays/june/";
 
     @Autowired
     private CalendarDayRepository calendarDayRepository;
@@ -48,12 +48,14 @@ public class CalendarDayService {
                     additionalInfoList.add(captionElement.text());
                 }
 
-                // Get the link to international information
-                Element linkElement = dayElement.selectFirst(".caption .title a[href]");
-                String link = linkElement.attr("href");
-
-                // Scrape international information from the link
-                List<String> internationalInformationList = scrapeInternationalInformation(link);
+                // Get the links to international information
+                Elements linkElements = dayElement.select(".caption .title > a[href]");
+                List<String> internationalInformationList = new ArrayList<>();
+                for (Element linkElement : linkElements) {
+                    String link = linkElement.attr("href");
+                    List<String> internationalInformation = scrapeInternationalInformation(link);
+                    internationalInformationList.addAll(internationalInformation);
+                }
 
                 // Create a new CalendarDay object and set the values
                 CalendarDay calendarDay = new CalendarDay();
@@ -96,6 +98,7 @@ public class CalendarDayService {
         }
     }
 
+
     private String capitalize(String s) {
         if (s == null || s.length() == 0) {
             return s;
@@ -103,22 +106,18 @@ public class CalendarDayService {
         return s.substring(0, 1).toUpperCase() + s.substring(1);
     }
 
+
     private List<String> scrapeInternationalInformation(String link) {
         List<String> internationalInformationList = new ArrayList<>();
         try {
             Document document = Jsoup.connect(link).get();
-            Elements internationalInfoElements = document.select(".caption .title a[href]");
-            for (Element internationalInfoElement : internationalInfoElements) {
-                String internationalLink = internationalInfoElement.attr("href");
-                Document internationalDocument = Jsoup.connect(internationalLink).get();
-                Elements internationalTextElements = internationalDocument.select("div.maintext > p");
-                if (!internationalTextElements.isEmpty()) {
-                    StringBuilder internationalInfoBuilder = new StringBuilder();
-                    for (Element element : internationalTextElements) {
-                        internationalInfoBuilder.append(element.text()).append("\n");
-                    }
-                    internationalInformationList.add(internationalInfoBuilder.toString().trim());
+            Elements internationalTextElements = document.select("div.maintext p");
+            if (!internationalTextElements.isEmpty()) {
+                StringBuilder internationalInfoBuilder = new StringBuilder();
+                for (Element element : internationalTextElements) {
+                    internationalInfoBuilder.append(element.text()).append("\n");
                 }
+                internationalInformationList.add(internationalInfoBuilder.toString().trim());
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -137,4 +136,26 @@ public class CalendarDayService {
     public CalendarDay getCalendarDayById(Long id) {
         return calendarDayRepository.findById(id).orElse(null);
     }
+
+    public List<String> getInternationalInformationList(CalendarDay calendarDay) {
+        List<String> internationalInformationList = new ArrayList<>();
+        for (int i = 1; i <= 9; i++) {
+            String internationalInfoColumn = "internationalInformation" + i;
+            String internationalInfo = getInternationalInfoValue(calendarDay, internationalInfoColumn);
+            if (internationalInfo != null && !internationalInfo.isEmpty()) {
+                internationalInformationList.add(internationalInfo);
+            }
+        }
+        return internationalInformationList;
+    }
+
+    private String getInternationalInfoValue(CalendarDay calendarDay, String column) {
+        try {
+            return (String) calendarDay.getClass().getMethod("get" + capitalize(column)).invoke(calendarDay);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }
