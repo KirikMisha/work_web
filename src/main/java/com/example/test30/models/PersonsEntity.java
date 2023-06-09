@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PersonEntity {
+public class PersonsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,6 +21,7 @@ public class PersonEntity {
     private String position;
     private String officeNumber;
     private String phoneNumber;
+    private String landlinePhone;
 
 }
 

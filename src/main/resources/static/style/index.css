@@ -80,3 +80,7 @@ a {
     text-decoration: none;
     color: inherit;
 }
+.nav-link:hover,
+.link-highlight:hover {
+    color: #000000;
+}

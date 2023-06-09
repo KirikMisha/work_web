@@ -9,25 +9,7 @@
 </head>
 <body>
 <header th:replace="components/header :: header">
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Logo</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link 1</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link 2</a>
-                </li>
-                <!-- Добавьте другие пункты меню здесь -->
-            </ul>
-        </div>
-    </nav>
+
 </header>
 
 <div class="container">
@@ -38,50 +20,61 @@
     </div>
     <div class="col-md-12">
         <h3><span th:text="${calendarDay.date}"></span></h3>
-        <p>
-            <a th:href="@{/details/info/1(id=*{calendarDay.id})}">
-                <span th:utext="${calendarDay.additionalInfo1}"></span>
-            </a></p>
-        <p>
-            <a th:href="@{/details/info/2(id=${calendarDay.id})}">
-                <span th:utext="${calendarDay.additionalInfo2}"></span>
-            </a></p>
-        <p>
-            <a th:href="@{/details/info/3(id=${calendarDay.id})}">
-                <span th:utext="${calendarDay.additionalInfo3}"></span>
-            </a></p>
-        <p>
-            <a th:href="@{/details/info/4(id=${calendarDay.id})}">
-                <span th:utext="${calendarDay.additionalInfo4}"></span>
-            </a></p>
-        <p>
-            <a th:href="@{/details/info/5(id=${calendarDay.id})}">
-                <span th:utext="${calendarDay.additionalInfo5}"></span>
-            </a></p>
-        <p>
-            <a th:href="@{/details/info/6(id=${calendarDay.id})}">
-                <span th:utext="${calendarDay.additionalInfo6}"></span>
-            </a></p>
-        <p>
-            <a th:href="@{/details/info/7(id=${calendarDay.id})}">
-                <span th:utext="${calendarDay.additionalInfo7}"></span>
-            </a></p>
-        <p>
-            <a th:href="@{/details/info/8(id=${calendarDay.id})}">
-                <span th:utext="${calendarDay.additionalInfo8}"></span>
-            </a></p>
-        <p>
-            <a th:href="@{/details/info/9(id=${calendarDay.id})}">
-                <span th:utext="${calendarDay.additionalInfo9}"></span>
-            </a></p>
-        <p>
-            <a th:href="@{/details/info/10(id=${calendarDay.id})}">
-                <span th:utext="${calendarDay.additionalInfo10}"></span>
-            </a></p>
+        <ul class="list-group">
+            <p th:if="${calendarDay.additionalInfo1 != null and !calendarDay.additionalInfo1.isEmpty()}">
+                <a th:href="@{/details/info/1(id=*{calendarDay.id})}" class="list-group-item list-group-item-action">
+                    <span class="glyphicon glyphicon-star" th:utext="${calendarDay.additionalInfo1}"></span>
+                </a>
+            </p>
+            <p th:if="${calendarDay.additionalInfo2 != null and !calendarDay.additionalInfo2.isEmpty()}">
+                <a th:href="@{/details/info/2(id=${calendarDay.id})}" class="list-group-item list-group-item-action">
+                    <span th:utext="${calendarDay.additionalInfo2}"></span>
+                </a>
+            </p>
+            <p th:if="${calendarDay.additionalInfo3 != null and !calendarDay.additionalInfo3.isEmpty()}">
+                <a th:href="@{/details/info/3(id=${calendarDay.id})}" class="list-group-item list-group-item-action">
+                    <span th:utext="${calendarDay.additionalInfo3}"></span>
+                </a>
+            </p>
+            <p th:if="${calendarDay.additionalInfo4 != null and !calendarDay.additionalInfo4.isEmpty()}">
+                <a th:href="@{/details/info/4(id=${calendarDay.id})}" class="list-group-item list-group-item-action">
+                    <span th:utext="${calendarDay.additionalInfo4}"></span>
+                </a>
+            </p>
+            <p th:if="${calendarDay.additionalInfo5 != null and !calendarDay.additionalInfo5.isEmpty()}">
+                <a th:href="@{/details/info/5(id=${calendarDay.id})}" class="list-group-item list-group-item-action">
+                    <span th:utext="${calendarDay.additionalInfo5}"></span>
+                </a>
+            </p>
+            <p th:if="${calendarDay.additionalInfo6 != null and !calendarDay.additionalInfo6.isEmpty()}">
+                <a th:href="@{/details/info/6(id=${calendarDay.id})}" class="list-group-item list-group-item-action">
+                    <span th:utext="${calendarDay.additionalInfo6}"></span>
+                </a>
+            </p>
+            <p th:if="${calendarDay.additionalInfo7 != null and !calendarDay.additionalInfo7.isEmpty()}">
+                <a th:href="@{/details/info/7(id=${calendarDay.id})}" class="list-group-item list-group-item-action">
+                    <span th:utext="${calendarDay.additionalInfo7}"></span>
+                </a>
+            </p>
+            <p th:if="${calendarDay.additionalInfo8 != null and !calendarDay.additionalInfo8.isEmpty()}">
+                <a th:href="@{/details/info/8(id=${calendarDay.id})}" class="list-group-item list-group-item-action">
+                    <span th:utext="${calendarDay.additionalInfo8}"></span>
+                </a>
+            </p>
+            <p th:if="${calendarDay.additionalInfo9 != null and !calendarDay.additionalInfo9.isEmpty()}">
+                <a th:href="@{/details/info/9(id=${calendarDay.id})}" class="list-group-item list-group-item-action">
+                    <span th:utext="${calendarDay.additionalInfo9}"></span>
+                </a>
+            </p>
+            <p th:if="${calendarDay.additionalInfo10 != null and !calendarDay.additionalInfo10.isEmpty()}">
+                <a th:href="@{/details/info/10(id=${calendarDay.id})}" class="list-group-item list-group-item-action">
+                    <span th:utext="${calendarDay.additionalInfo10}"></span>
+                </a>
+            </p>
+        </ul>
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/js/bootstrap.js"></script>
 </body>
 </html>

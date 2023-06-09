@@ -16,6 +16,8 @@ public class CalendarDay {
     private Long id;
 
     private LocalDate date;
+    private int day;
+    private int month;
     private String description;
     @Column(name = "additional_info", columnDefinition = "LONGTEXT")
     private String additionalInfo;

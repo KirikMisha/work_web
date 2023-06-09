@@ -1,62 +1,82 @@
-function search() {
-    let firstName = document.getElementById("firstName").value;
-    let lastName = document.getElementById("lastName").value;
+document.addEventListener('DOMContentLoaded', function() {
+    var firstNameInput = document.getElementById("firstName");
+    var lastNameInput = document.getElementById("lastName");
 
-    axios.get("/list/search", {
-        params: {
-            firstName: firstName,
-            lastName: lastName
-        }
-    })
-        .then(function (response) {
-            let results = response.data;
-            let resultsContainer = document.getElementById("results");
-            resultsContainer.innerHTML = "";
+    firstNameInput.addEventListener("keyup", search);
+    lastNameInput.addEventListener("keyup", search);
 
-            for (let i = 0; i < results.length; i++) {
-                let person = results[i];
-                let card = createCard(person);
-                resultsContainer.appendChild(card);
+    function search() {
+        var firstName = firstNameInput.value;
+        var lastName = lastNameInput.value;
+
+        axios.get("/list/search", {
+            params: {
+                firstName: firstName,
+                lastName: lastName
             }
         })
-        .catch(function (error) {
-            console.log(error);
-        });
-}
+            .then(function (response) {
+                var results = response.data;
+                var resultsContainer = document.getElementById("results");
+                resultsContainer.innerHTML = "";
 
-function createCard(person) {
-    let card = document.createElement("div");
-    card.classList.add("card", "mt-2");
+                for (var i = 0; i < results.length; i++) {
+                    var person = results[i];
+                    var card = createCard(person);
+                    resultsContainer.appendChild(card);
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
 
-    let img = document.createElement("img");
-    img.src = "/icon/Icon_Person.png";
-    img.classList.add("card-img-top");
-    img.alt = "Изображение работника";
-    card.appendChild(img);
+    function createCard(person) {
+        var card = document.createElement("div");
+        card.classList.add("card", "mt-2");
 
-    let cardBody = document.createElement("div");
-    cardBody.classList.add("card-body");
-    card.appendChild(cardBody);
+        var img = document.createElement("img");
+        img.src = "/icon/Icon_Person.png";
+        img.classList.add("card-img-top");
+        img.alt = "Изображение работника";
+        card.appendChild(img);
 
-    let title = document.createElement("h3");
-    title.classList.add("card-title");
-    title.textContent = person.firstName + " " + person.middleName + " " + person.lastName;
-    cardBody.appendChild(title);
+        var cardBody = document.createElement("div");
+        cardBody.classList.add("card-body");
+        card.appendChild(cardBody);
 
-    let details = document.createElement("p");
-    cardBody.appendChild(details);
+        var title = document.createElement("h5");
+        title.classList.add("card-title");
+        title.textContent = person.firstName + " " + person.middleName + " " + person.lastName;
+        cardBody.appendChild(title);
 
-    let phoneNumber = document.createElement("span");
-    phoneNumber.classList.add("card-text");
-    phoneNumber.textContent = "Телефон: " + person.phoneNumber;
-    details.appendChild(phoneNumber);
-    details.appendChild(document.createElement("br"));
+        var details = document.createElement("p");
+        cardBody.appendChild(details);
 
-    let position = document.createElement("span");
-    position.classList.add("card-text");
-    position.textContent = "Должность: " + person.position + " " + person.officeNumber;
-    details.appendChild(position);
-    details.appendChild(document.createElement("br"));
+        var phoneNumber = document.createElement("span");
+        phoneNumber.classList.add("card-text");
+        phoneNumber.textContent = "Городской номер: " + person.phoneNumber;
+        details.appendChild(phoneNumber);
+        details.appendChild(document.createElement("br"));
 
-    return card;
-}
+        var landlinePhone = document.createElement("span");
+        landlinePhone.classList.add("card-text");
+        landlinePhone.textContent = "Местный номер: " + person.landlinePhone;
+        details.appendChild(landlinePhone);
+        details.appendChild(document.createElement("br"));
+
+        var position = document.createElement("span");
+        position.classList.add("card-text");
+        position.textContent = "Должность: " + person.position;
+        details.appendChild(position);
+        details.appendChild(document.createElement("br"));
+
+        var officeNumber = document.createElement("span");
+        officeNumber.classList.add("card-text");
+        officeNumber.textContent = "Номер здания: " + person.officeNumber;
+        details.appendChild(officeNumber);
+        details.appendChild(document.createElement("br"));
+
+        return card;
+    }
+});

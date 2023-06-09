@@ -4,7 +4,8 @@
 .card {
     margin-right: 20px;
     margin-bottom: 20px;
-    width: 300px;
+    /*width: 300px;*/
+    display: flex;
 }
 .card-title {
     font-size: 24px;
@@ -19,5 +20,10 @@
     margin-left: 600px;
 }
 .card-img-top{
-    width:200px;
+    width: 200px;
+    margin-right: 20px;
+}
+#results {
+    height: 100vh; /* Устанавливаем высоту 100% от видимой области страницы */
+    overflow-y: scroll; /* Добавляем вертикальную прокрутку */
 }

@@ -33,7 +33,6 @@ public class CalendarDayService {
             for (Element dayElement : dayElements) {
                 // Get the date and format it
                 String dataNum = dayElement.select(".dataNum a").attr("href").split("/")[2];
-                String dateDesc = dayElement.select(".dataNum .desc").text();
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d");
                 LocalDate date = LocalDate.parse(dataNum, formatter);
@@ -57,25 +56,49 @@ public class CalendarDayService {
                     internationalInformationList.addAll(internationalInformation);
                 }
 
-                // Create a new CalendarDay object and set the values
-                CalendarDay calendarDay = new CalendarDay();
-                calendarDay.setDate(date);
-                calendarDay.setDescription(description);
+                // Check if a CalendarDay object already exists for the given day and month
+                int day = date.getDayOfMonth();
+                int month = date.getMonthValue();
+                CalendarDay existingCalendarDay = calendarDayRepository.findByDayAndMonth(day, month);
 
-                // Set additional information columns
-                for (int i = 0; i < additionalInfoList.size() && i < 10; i++) {
-                    String additionalInfoColumn = "additionalInfo" + (i + 1);
-                    setAdditionalInfoColumn(calendarDay, additionalInfoColumn, additionalInfoList.get(i));
+                if (existingCalendarDay != null) {
+                    // If the object exists, check each column for differences
+                    boolean shouldUpdate = false;
+
+                    if (!existingCalendarDay.getDescription().equals(description)) {
+                        existingCalendarDay.setDescription(description);
+                        shouldUpdate = true;
+                    }
+
+                    // Check the other columns for differences and update if necessary
+                    // ... Add checks for the other columns
+
+                    // If any column has been updated, save the changes
+                    if (shouldUpdate) {
+                        calendarDayRepository.save(existingCalendarDay);
+                    }
+                } else {
+                    // If the object doesn't exist, create a new one and save it
+                    CalendarDay newCalendarDay = new CalendarDay();
+                    newCalendarDay.setDay(day);
+                    newCalendarDay.setMonth(month);
+                    newCalendarDay.setDate(date);
+                    newCalendarDay.setDescription(description);
+
+                    // Set additional information columns
+                    for (int i = 0; i < additionalInfoList.size() && i < 10; i++) {
+                        String additionalInfoColumn = "additionalInfo" + (i + 1);
+                        setAdditionalInfoColumn(newCalendarDay, additionalInfoColumn, additionalInfoList.get(i));
+                    }
+
+                    // Set international information columns
+                    for (int i = 0; i < internationalInformationList.size() && i < 9; i++) {
+                        String internationalInfoColumn = "internationalInformation" + (i + 1);
+                        setInternationalInfoColumn(newCalendarDay, internationalInfoColumn, internationalInformationList.get(i));
+                    }
+
+                    calendarDayRepository.save(newCalendarDay);
                 }
-
-                // Set international information columns
-                for (int i = 0; i < internationalInformationList.size() && i < 9; i++) {
-                    String internationalInfoColumn = "internationalInformation" + (i + 1);
-                    setInternationalInfoColumn(calendarDay, internationalInfoColumn, internationalInformationList.get(i));
-                }
-
-                // Save the CalendarDay object to the database
-                calendarDayRepository.save(calendarDay);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -98,14 +121,12 @@ public class CalendarDayService {
         }
     }
 
-
     private String capitalize(String s) {
         if (s == null || s.length() == 0) {
             return s;
         }
         return s.substring(0, 1).toUpperCase() + s.substring(1);
     }
-
 
     private List<String> scrapeInternationalInformation(String link) {
         List<String> internationalInformationList = new ArrayList<>();
@@ -135,27 +156,6 @@ public class CalendarDayService {
 
     public CalendarDay getCalendarDayById(Long id) {
         return calendarDayRepository.findById(id).orElse(null);
-    }
-
-    public List<String> getInternationalInformationList(CalendarDay calendarDay) {
-        List<String> internationalInformationList = new ArrayList<>();
-        for (int i = 1; i <= 9; i++) {
-            String internationalInfoColumn = "internationalInformation" + i;
-            String internationalInfo = getInternationalInfoValue(calendarDay, internationalInfoColumn);
-            if (internationalInfo != null && !internationalInfo.isEmpty()) {
-                internationalInformationList.add(internationalInfo);
-            }
-        }
-        return internationalInformationList;
-    }
-
-    private String getInternationalInfoValue(CalendarDay calendarDay, String column) {
-        try {
-            return (String) calendarDay.getClass().getMethod("get" + capitalize(column)).invoke(calendarDay);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
 }

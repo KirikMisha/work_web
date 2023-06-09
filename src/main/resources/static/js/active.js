@@ -1,16 +1,23 @@
-$(document).ready(function() {
+document.addEventListener('DOMContentLoaded', function() {
     var path = window.location.pathname;
-    var link = $('header a[href="' + path + '"]');
-    link.addClass('active');
-
-    $(".navbar-toggler").click(function() {
-        $("#collapsedNav").toggleClass("show");
+    var links = document.querySelectorAll('header a');
+    links.forEach(function(link) {
+        if (link.getAttribute('href') === path) {
+            link.classList.add('active');
+        }
     });
 
-    $(document).click(function(event) {
-        if (!$(event.target).closest('.navbar-toggler').length && !$(event.target).closest('#collapsedNav').length) {
-            $("#collapsedNav").removeClass("show");
+    var navbarToggler = document.querySelector('.navbar-toggler');
+    var collapsedNav = document.querySelector('#collapsedNav');
+
+    navbarToggler.addEventListener('click', function() {
+        collapsedNav.classList.toggle('show');
+    });
+
+    document.addEventListener('click', function(event) {
+        var target = event.target;
+        if (!target.closest('.navbar-toggler') && !target.closest('#collapsedNav')) {
+            collapsedNav.classList.remove('show');
         }
     });
 });
-
